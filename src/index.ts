@@ -1,1 +1,3 @@
-export const squared = (n: number): number => n * n;
+import Home from './home';
+
+export { Home };

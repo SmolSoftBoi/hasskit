@@ -3,8 +3,8 @@ export interface Hass {
   connection: Connection;
   connected: boolean;
   states: HassEntities;
-  entities: { [id: string]: EntityRegistryDisplayEntry };
-  devices: { [id: string]: DeviceRegistryEntry };
+  entities: { [id: string]: HassEntityRegistryDisplayEntry };
+  devices: { [id: string]: HassDeviceRegistryEntry };
   areas: { [id: string]: AreaRegistryEntry };
   floors: { [id: string]: FloorRegistryEntry };
   services: HassServices;
@@ -73,4 +73,40 @@ export interface Hass {
     value?: any,
   ): string;
   formatEntityAttributeName(stateObj: HassEntity, attribute: string): string;
+}
+
+export interface HassDeviceRegistryEntry extends RegistryEntry {
+  id: string;
+  config_entries: string[];
+  connections: Array<[string, string]>;
+  identifiers: Array<[string, string]>;
+  manufacturer: string | null;
+  model: string | null;
+  model_id: string | null;
+  name: string | null;
+  labels: string[];
+  sw_version: string | null;
+  hw_version: string | null;
+  serial_number: string | null;
+  via_device_id: string | null;
+  area_id: string | null;
+  name_by_user: string | null;
+  entry_type: 'service' | null;
+  disabled_by: 'user' | 'integration' | 'config_entry' | null;
+  configuration_url: string | null;
+  primary_config_entry: string | null;
+}
+
+export interface HassEntityRegistryDisplayEntry {
+  entity_id: string;
+  name?: string;
+  icon?: string;
+  device_id?: string;
+  area_id?: string;
+  labels: string[];
+  hidden?: boolean;
+  entity_category?: EntityCategory;
+  translation_key?: string;
+  platform?: string;
+  display_precision?: number;
 }
