@@ -88,6 +88,31 @@ export default class Home implements HomeType {
     }
   }
 
+  get lightEntity(): Entity | void {
+    const magicAreasGlobalDevice = this.devices.find((device) =>
+      device.idetntifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
+      ),
+    );
+
+    if (magicAreasGlobalDevice) {
+      const magicAreasGlobalLightEntities =
+        magicAreasGlobalDevice.entitiesWithDomains(['light']);
+
+      if (magicAreasGlobalLightEntities.length > 0) {
+        return magicAreasGlobalLightEntities[0];
+      }
+    }
+
+    const lightEntities = this.entitiesWithDomains(['light']);
+
+    if (lightEntities.length > 0) {
+      return lightEntities[0];
+    }
+  }
+
   get c02SignalEntity(): Entity | void {
     const c02SignalDevices = this.devices.filter((device) =>
       device.idetntifiers.filter(
