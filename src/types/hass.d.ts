@@ -5,7 +5,7 @@ export interface Hass {
   states: HassEntities;
   entities: { [id: string]: HassEntityRegistryDisplayEntry };
   devices: { [id: string]: HassDeviceRegistryEntry };
-  areas: { [id: string]: AreaRegistryEntry };
+  areas: { [id: string]: HassAreaRegistryEntry };
   floors: { [id: string]: HassFloorRegistryEntry };
   services: HassServices;
   config: HassConfig;
@@ -80,6 +80,16 @@ export interface HassFloorRegistryEntry extends RegistryEntry {
   name: string;
   level: number | null;
   icon: string | null;
+  aliases: string[];
+}
+
+export interface HassAreaRegistryEntry extends RegistryEntry {
+  area_id: string;
+  floor_id: string | null;
+  name: string;
+  picture: string | null;
+  icon: string | null;
+  labels: string[];
   aliases: string[];
 }
 
