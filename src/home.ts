@@ -3,6 +3,10 @@ import { Hass } from './types/hass';
 import Entity from './entity';
 import Device from './device';
 import { WEATHERKIT_PLATFORM } from './integrations/weatherkit';
+import {
+  MAGIC_AREAS_GLOBAL_DEVICE_ID,
+  MAGIC_AREAS_PLATFORM,
+} from './integrations/magicAreas';
 
 export type HomeConfig = object;
 
@@ -59,7 +63,32 @@ export default class Home implements HomeType {
     }
   }
 
-  get energyEntity(): Entity | void {
+  get climateEntity(): Entity | void {
+    const magicAreasGlobalDevice = this.devices.find((device) =>
+      device.idetntifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
+      ),
+    );
+
+    if (magicAreasGlobalDevice) {
+      const magicAreasGlobalClimateEntities =
+        magicAreasGlobalDevice.entitiesWithDomains(['climate']);
+
+      if (magicAreasGlobalClimateEntities.length > 0) {
+        return magicAreasGlobalClimateEntities[0];
+      }
+    }
+
+    const climateEntities = this.entitiesWithDomains(['climate']);
+
+    if (climateEntities.length > 0) {
+      return climateEntities[0];
+    }
+  }
+
+  get c02SignalEntity(): Entity | void {
     const c02SignalDevices = this.devices.filter((device) =>
       device.idetntifiers.filter(
         (identifiers) => identifiers[0] === 'c02signal',

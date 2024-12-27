@@ -33,4 +33,8 @@ export default class Device implements Accessory {
       .filter((entity) => entity.device_id === this.uniqueIdentifier)
       .map((entitiy) => new Entity(this.home, entitiy));
   }
+
+  entitiesWithDomains(domains: string[]): Entity[] {
+    return this.entities.filter((entity) => domains.includes(entity.domain));
+  }
 }
