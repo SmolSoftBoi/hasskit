@@ -6,7 +6,7 @@ export interface Hass {
   entities: { [id: string]: HassEntityRegistryDisplayEntry };
   devices: { [id: string]: HassDeviceRegistryEntry };
   areas: { [id: string]: AreaRegistryEntry };
-  floors: { [id: string]: FloorRegistryEntry };
+  floors: { [id: string]: HassFloorRegistryEntry };
   services: HassServices;
   config: HassConfig;
   themes: Themes;
@@ -73,6 +73,14 @@ export interface Hass {
     value?: any,
   ): string;
   formatEntityAttributeName(stateObj: HassEntity, attribute: string): string;
+}
+
+export interface HassFloorRegistryEntry extends RegistryEntry {
+  floor_id: string;
+  name: string;
+  level: number | null;
+  icon: string | null;
+  aliases: string[];
 }
 
 export interface HassDeviceRegistryEntry extends RegistryEntry {

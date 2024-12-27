@@ -535,10 +535,10 @@
   resolved "https://registry.yarnpkg.com/@rspack/lite-tapable/-/lite-tapable-1.0.1.tgz#d4540a5d28bd6177164bc0ba0bee4bdec0458591"
   integrity sha512-VynGOEsVw2s8TAlLf/uESfrgfrq2+rcXB1muPJYBWbsm1Oa6r5qVQhjA5ggM6z/coYPrsVMgovl3Ff7Q7OCp1w==
 
-"@smolpack/home-types@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@smolpack/home-types/-/home-types-1.0.3.tgz#24228af4de9d864244ec7f883b64a6ac92ccba4e"
-  integrity sha512-Hakbn9YksS837nhj4R0ufiHfoOdlfHt4eLAC56kmdrgDzolUHcfLwrw4hHk9Yz45TU7e+0FkokkiW93BOE0ddA==
+"@smolpack/home-types@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@smolpack/home-types/-/home-types-1.0.4.tgz#db15aabc337caa6c1ede1986b505665c8ed891b9"
+  integrity sha512-5C7nwB67nakOpGiuzSAwlP5hcQYFsT750eQNPXpPv0Xxo5hVc9a1Sk2vQQvLmaI1BejNLh4xlxIZDyvVA1t58A==
 
 "@swc/helpers@^0.5.15":
   version "0.5.15"

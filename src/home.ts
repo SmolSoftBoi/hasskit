@@ -7,6 +7,7 @@ import {
   MAGIC_AREAS_GLOBAL_DEVICE_ID,
   MAGIC_AREAS_PLATFORM,
 } from './integrations/magicAreas';
+import Floor from './floor';
 
 export type HomeConfig = object;
 
@@ -21,6 +22,10 @@ export default class Home implements HomeType {
 
   // Home
 
+  get zones(): Floor[] {
+    return this.floors;
+  }
+
   get accessories(): Device[] {
     return this.devices;
   }
@@ -30,6 +35,12 @@ export default class Home implements HomeType {
   }
 
   // Hass
+
+  get floors(): Floor[] {
+    return Object.values(this.hass.floors).map(
+      (floor) => new Floor(this, floor),
+    );
+  }
 
   get devices(): Device[] {
     return Object.values(this.hass.devices).map(
@@ -113,7 +124,7 @@ export default class Home implements HomeType {
     }
   }
 
-  getLockEntity(): Entity | void {
+  get lockEntity(): Entity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
       device.idetntifiers.find(
         (identifiers) =>
