@@ -186,4 +186,14 @@ export default class Home implements HomeType {
       }
     }
   }
+
+  get wasteEntity(): Entity | void {
+    const wasteEntities = this.entitiesWithDomains(['calendar']).filter(
+      (entity) => entity.name.includes('waste'),
+    );
+
+    if (wasteEntities.length > 0) {
+      return wasteEntities[0];
+    }
+  }
 }

@@ -16,6 +16,10 @@ export default class Entity implements Service {
 
   // Home
 
+  get name(): string {
+    return this.hassEntity.name || '';
+  }
+
   get characteristics(): Characteristic[] {
     return [
       new Characteristic(this.home, this.home.hass.states[this.hassEntity]),
