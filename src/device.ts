@@ -19,7 +19,7 @@ export default class Device implements Accessory {
   }
 
   get name(): string {
-    return this.hassDevice.name;
+    return this.hassDevice.name || '';
   }
 
   get services(): Entity[] {
