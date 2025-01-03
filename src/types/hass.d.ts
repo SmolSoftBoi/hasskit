@@ -35,7 +35,7 @@ export interface Hass {
   dockedSidebar: 'docked' | 'always_hidden' | 'auto';
   defaultPanel: string;
   moreInfoEntityId: string | null;
-  user?: CurrentUser;
+  user?: HassCurrentUser;
   userData?: CoreFrontendUserData | null;
   hassUrl(path?): string;
   callService(
@@ -129,4 +129,13 @@ export interface HassEntityRegistryDisplayEntry {
   translation_key?: string;
   platform?: string;
   display_precision?: number;
+}
+
+export interface HassCurrentUser {
+  id: string;
+  is_owner: boolean;
+  is_admin: boolean;
+  name: string;
+  credentials: Credential[];
+  mfa_modules: MFAModule[];
 }

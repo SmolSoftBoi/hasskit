@@ -49,6 +49,10 @@ export default class Home implements HomeType {
   }
 
   get currentUser(): User {
+    if (!this.hass.user) {
+      throw new Error();
+    }
+
     return new User(this, this.hass.user);
   }
 
