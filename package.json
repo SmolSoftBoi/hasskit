@@ -16,6 +16,7 @@
     "dist"
   ],
   "scripts": {
+    "prepublish": "rslib build",
     "build": "rslib build",
     "dev": "rslib build --watch",
     "format": "prettier --write .",
