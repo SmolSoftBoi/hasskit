@@ -14,13 +14,19 @@ export default class Floor implements Zone {
 
   // Home
 
+  get name(): string {
+    return this.hassFloor.name;
+  }
+
   get uniqueIdentifier(): string {
     return this.hassFloor.floor_id;
   }
 
   get rooms(): Area[] {
-    return Object.values(this.home.hass.areas).filter(
-      (area) => area.floor_id && area.floor_id === this.uniqueIdentifier,
-    );
+    return Object.values(this.home.hass.areas)
+      .filter(
+        (area) => area.floor_id && area.floor_id === this.uniqueIdentifier,
+      )
+      .map((area) => new Area(this.home, area));
   }
 }

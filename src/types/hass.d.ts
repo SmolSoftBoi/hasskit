@@ -1,4 +1,4 @@
-import { HassConfig } from "home-assistant-js-websocket";
+import { HassConfig } from 'home-assistant-js-websocket';
 
 export interface Hass {
   auth: Auth & { external?: ExternalMessaging };
