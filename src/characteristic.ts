@@ -13,6 +13,14 @@ export default class Characteristic implements CharacteristicType {
 
   // Home
 
+  get uniqueIdentifier(): string {
+    return this.hassState.entity_id;
+  }
+
+  get localizedDescription(): string {
+    return this.hassState.attributes.friendly_name || '';
+  }
+
   get units(): string | void {
     return this.hassState.attributes.unit_of_measurement;
   }

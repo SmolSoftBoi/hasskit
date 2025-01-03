@@ -25,7 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^9.12.0",
     "@rslib/core": "^0.2.2",
-    "@smolpack/home-types": "^1.0.5",
+    "@smolpack/home-types": "^1.0.9",
     "@types/node": "^22.8.1",
     "@vitest/coverage-v8": "2.1.8",
     "eslint": "^9.12.0",

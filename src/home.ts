@@ -22,6 +22,10 @@ export default class Home implements HomeType {
 
   // Home
 
+  get name(): string {
+    return this.hass.config.location_name;
+  }
+
   get zones(): Floor[] {
     return this.floors;
   }
