@@ -8,6 +8,8 @@ import {
   MAGIC_AREAS_PLATFORM,
 } from './integrations/magicAreas';
 import Floor from './floor';
+import Area from './area';
+import User from './user';
 
 export type HomeConfig = object;
 
@@ -26,6 +28,10 @@ export default class Home implements HomeType {
     return this.hass.config.location_name;
   }
 
+  get rooms(): Area[] {
+    return this.areas;
+  }
+
   get zones(): Floor[] {
     return this.floors;
   }
@@ -38,7 +44,19 @@ export default class Home implements HomeType {
     return this.entitiesWithDomains(serviceTypes);
   }
 
+  get state(): string {
+    return this.hass.config.state;
+  }
+
+  get currentUser(): User {
+    return new User(this, this.hass.user);
+  }
+
   // Hass
+
+  get areas(): Area[] {
+    return Object.values(this.hass.areas).map((area) => new Area(this, area));
+  }
 
   get floors(): Floor[] {
     return Object.values(this.hass.floors).map(
