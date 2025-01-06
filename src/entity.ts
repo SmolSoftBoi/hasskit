@@ -53,7 +53,7 @@ export default class Entity implements Service {
   }
 
   get domain(): string {
-    return this.hassEntity.entity_id.split('.')[1];
+    return this.hassEntity.entity_id.split('.')[0];
   }
 
   get platform(): string | void {

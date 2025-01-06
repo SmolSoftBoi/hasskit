@@ -4,7 +4,6 @@ import { HassDeviceRegistryEntry } from './types/hass';
 import Entity from './entity';
 import Area from './area';
 import { LightEntity } from './entities';
-import Light from './states/light';
 
 export default class Device implements Accessory {
   home: Home;
