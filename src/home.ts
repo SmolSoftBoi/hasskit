@@ -85,16 +85,14 @@ export default class Home implements HomeType {
   }
 
   get entities(): (Entity | LightEntity)[] {
-    return Object.values(this.hass.entities).map(
-      (entity) => { 
-        switch (entity.entity_id.split('.')[0]) {
-          case 'light':
-            return new LightEntity(this, entity);
-          default:
-            return new Entity(this, entity);
-        }
-       },
-    );
+    return Object.values(this.hass.entities).map((entity) => {
+      switch (entity.entity_id.split('.')[0]) {
+        case 'light':
+          return new LightEntity(this, entity);
+        default:
+          return new Entity(this, entity);
+      }
+    });
   }
 
   get weatherEntity(): Entity | void {

@@ -57,12 +57,12 @@ export default class Device implements Accessory {
   }
 
   get entities(): Entity[] {
-    return this.home.entities
-      .filter((entity) => entity.deviceIdentifier === this.uniqueIdentifier);
+    return this.home.entities.filter(
+      (entity) => entity.deviceIdentifier === this.uniqueIdentifier,
+    );
   }
 
   entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
-    return this.entities
-      .filter((entity) => domains.includes(entity.domain));
+    return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 }
