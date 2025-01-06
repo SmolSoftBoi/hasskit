@@ -80,7 +80,7 @@ export default class Home implements HomeType {
     );
   }
 
-  entitiesWithDomains(domains: string[]): Entity[] {
+  entitiesWithDomains(domains: string[]): EntityTypes[] {
     return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 

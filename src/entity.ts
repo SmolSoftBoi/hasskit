@@ -43,7 +43,13 @@ export default class Entity implements Service {
   // Hass
 
   get areaIdentifier(): string | void {
-    return this.hassEntity.area_id || void 0;
+    if (this.hassEntity.area_id) {
+      return this.hassEntity.area_id;
+    }
+
+    if (this.device && this.device.area) {
+      return this.device.area.uniqueIdentifier;
+    }
   }
 
   get deviceIdentifier(): string | void {
