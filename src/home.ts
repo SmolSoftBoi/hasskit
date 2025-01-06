@@ -84,9 +84,16 @@ export default class Home implements HomeType {
     return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 
-  get entities(): Entity[] {
+  get entities(): (Entity | LightEntity)[] {
     return Object.values(this.hass.entities).map(
-      (entity) => new Entity(this, entity),
+      (entity) => { 
+        switch (entity.entity_id.split('.')[0]) {
+          case 'light':
+            return new LightEntity(this, entity);
+          default:
+            return new Entity(this, entity);
+        }
+       },
     );
   }
 

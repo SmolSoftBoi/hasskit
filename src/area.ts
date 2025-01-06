@@ -42,22 +42,13 @@ export default class Area implements Room {
   }
 
   get entities(): Entity[] {
-    return Object.values(this.home.hass.entities)
-      .filter((entity) => entity.area_id === this.uniqueIdentifier)
-      .map((entity) => new Entity(this.home, entity));
+    return this.home.entities
+      .filter((entity) => entity.areaIdentifier === this.uniqueIdentifier);
   }
 
   entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
     return this.entities
       .filter((entity) => domains.includes(entity.domain))
-      .map((entity) => {
-        switch (entity.domain) {
-          case 'light':
-            return new LightEntity(this.home, entity.hassEntity);
-          default:
-            return entity;
-        }
-      });
   }
 
   get climateEntity(): Entity | void {
