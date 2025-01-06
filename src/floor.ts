@@ -2,7 +2,7 @@ import { Zone } from '@smolpack/home-types';
 import Home from './home';
 import { HassFloorRegistryEntry } from './types/hass';
 import Area from './area';
-import Entity from './entity';
+import Entity, { EntityTypes } from './entity';
 import {
   MAGIC_AREAS_FLOOR_DEVICE_ID,
   MAGIC_AREAS_PLATFORM,
@@ -46,7 +46,7 @@ export default class Floor implements Zone {
       .map((area) => new Area(this.home, area));
   }
 
-  entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
+  entitiesWithDomains(domains: string[]): EntityTypes[] {
     const entities: Entity[] = [];
 
     for (const area of this.areas) {

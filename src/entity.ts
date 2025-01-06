@@ -3,8 +3,11 @@ import Home from './home';
 import { HassEntityRegistryDisplayEntry } from './types/hass';
 import State from './state';
 import Device from './device';
+import { LightEntity } from './entities';
 
-export type EntityDomain = string;
+export type EntityDomain = 'light' | string;
+
+export type EntityTypes = Entity | LightEntity;
 
 export default class Entity implements Service {
   home: Home;
@@ -56,7 +59,7 @@ export default class Entity implements Service {
 
   get device(): Device | void {
     return this.home.devices.find(
-      (device) => device.uniqueIdentifier === this.hassEntity.device_id,
+      (device) => device.uniqueIdentifier === this.deviceIdentifier,
     );
   }
 

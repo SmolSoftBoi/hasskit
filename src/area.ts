@@ -1,7 +1,7 @@
 import { Room } from '@smolpack/home-types';
 import Home from './home';
 import { HassAreaRegistryEntry } from './types/hass';
-import Entity from './entity';
+import Entity, { EntityTypes } from './entity';
 import Device from './device';
 import {
   MAGIC_AREAS_AREA_DEVICE_ID,
@@ -47,7 +47,7 @@ export default class Area implements Room {
     );
   }
 
-  entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
+  entitiesWithDomains(domains: string[]): EntityTypes[] {
     return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 

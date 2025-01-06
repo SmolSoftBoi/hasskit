@@ -1,6 +1,6 @@
 import { Home as HomeType } from '@smolpack/home-types';
 import { Hass } from './types/hass';
-import Entity from './entity';
+import Entity, { EntityTypes } from './entity';
 import Device from './device';
 import { WEATHERKIT_PLATFORM } from './integrations/weatherkit';
 import {
@@ -84,7 +84,7 @@ export default class Home implements HomeType {
     return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 
-  get entities(): (Entity | LightEntity)[] {
+  get entities(): EntityTypes[] {
     return Object.values(this.hass.entities).map((entity) => {
       switch (entity.entity_id.split('.')[0]) {
         case 'light':
