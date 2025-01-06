@@ -44,7 +44,12 @@ export default class Home implements HomeType {
     return this.entitiesWithDomains(serviceTypes);
   }
 
-  get state(): string {
+  get state():
+    | 'NOT_RUNNING'
+    | 'STARTING'
+    | 'RUNNING'
+    | 'STOPPING'
+    | 'FINAL_WRITE' {
     return this.hass.config.state;
   }
 

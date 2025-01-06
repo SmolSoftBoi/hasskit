@@ -1,8 +1,8 @@
-import { Characteristic as CharacteristicType } from '@smolpack/home-types';
+import { Characteristic } from '@smolpack/home-types';
 import { HassEntity } from 'home-assistant-js-websocket';
 import Home from './home';
 
-export default class Characteristic implements CharacteristicType {
+export default class State implements Characteristic {
   home: Home;
   hassState: HassEntity;
 

@@ -1,7 +1,7 @@
 import { Service } from '@smolpack/home-types';
 import Home from './home';
 import { HassEntityRegistryDisplayEntry } from './types/hass';
-import Characteristic from './characteristic';
+import State from './state';
 import Device from './device';
 
 export type EntityDomain = string;
@@ -25,10 +25,8 @@ export default class Entity implements Service {
     return this.hassEntity.entity_id;
   }
 
-  get characteristics(): Characteristic[] {
-    return [
-      new Characteristic(this.home, this.home.hass.states[this.hassEntity]),
-    ];
+  get characteristics(): State[] {
+    return [this.state];
   }
 
   get serviceType(): EntityDomain {
@@ -40,6 +38,13 @@ export default class Entity implements Service {
   }
 
   // Hass
+
+  get state(): State {
+    return new State(
+      this.home,
+      this.home.hass.states[this.hassEntity.entity_id],
+    );
+  }
 
   get device(): Device | void {
     return this.home.devices.find(

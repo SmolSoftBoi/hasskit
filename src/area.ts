@@ -8,6 +8,7 @@ import {
   MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS,
   MAGIC_AREAS_PLATFORM,
 } from './integrations/magicAreas';
+import { LightEntity } from './entities';
 
 export default class Area implements Room {
   home: Home;
@@ -46,8 +47,17 @@ export default class Area implements Room {
       .map((entity) => new Entity(this.home, entity));
   }
 
-  entitiesWithDomains(domains: string[]): Entity[] {
-    return this.entities.filter((entity) => domains.includes(entity.domain));
+  entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
+    return this.entities
+      .filter((entity) => domains.includes(entity.domain))
+      .map((entity) => {
+        switch (entity.domain) {
+          case 'light':
+            return new LightEntity(this.home, entity.hassEntity);
+          default:
+            return entity;
+        }
+      });
   }
 
   get climateEntity(): Entity | void {
@@ -79,7 +89,7 @@ export default class Area implements Room {
     }
   }
 
-  get lightEntityGroups(): Entity[] {
+  get lightEntityGroups(): LightEntity[] {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
       device.idetntifiers.find(
         (identifiers) =>
@@ -93,20 +103,20 @@ export default class Area implements Room {
     );
 
     if (magicAreasAreaDevice) {
-      const magicAreasAreaLightGroupEntities = magicAreasAreaDevice
-        .entitiesWithDomains(['light'])
-        .filter((entity) =>
-          Object.keys(MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS).includes(
-            entity.uniqueIdentifier,
-          ),
-        );
+      const magicAreasAreaLightGroupEntities = (
+        magicAreasAreaDevice.entitiesWithDomains(['light']) as LightEntity[]
+      ).filter((entity) =>
+        Object.keys(MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS).includes(
+          entity.uniqueIdentifier,
+        ),
+      );
 
       if (magicAreasAreaLightGroupEntities) {
         return magicAreasAreaLightGroupEntities;
       }
     }
 
-    return this.entitiesWithDomains(['light']);
+    return this.entitiesWithDomains(['light']) as LightEntity[];
   }
 
   get lockEntity(): Entity | void {

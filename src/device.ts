@@ -3,6 +3,8 @@ import Home from './home';
 import { HassDeviceRegistryEntry } from './types/hass';
 import Entity from './entity';
 import Area from './area';
+import { LightEntity } from './entities';
+import Light from './states/light';
 
 export default class Device implements Accessory {
   home: Home;
@@ -61,7 +63,16 @@ export default class Device implements Accessory {
       .map((entitiy) => new Entity(this.home, entitiy));
   }
 
-  entitiesWithDomains(domains: string[]): Entity[] {
-    return this.entities.filter((entity) => domains.includes(entity.domain));
+  entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
+    return this.entities
+      .filter((entity) => domains.includes(entity.domain))
+      .map((entity) => {
+        switch (entity.domain) {
+          case 'light':
+            return new LightEntity(this.home, entity.hassEntity);
+          default:
+            return entity;
+        }
+      });
   }
 }
