@@ -7,6 +7,7 @@ import {
   MAGIC_AREAS_FLOOR_DEVICE_ID,
   MAGIC_AREAS_PLATFORM,
 } from './integrations/magicAreas';
+import { LightEntity } from './entities';
 
 export default class Floor implements Zone {
   home: Home;
@@ -45,7 +46,7 @@ export default class Floor implements Zone {
       .map((area) => new Area(this.home, area));
   }
 
-  entitiesWithDomains(domains: string[]): Entity[] {
+  entitiesWithDomains(domains: string[]): (Entity | LightEntity)[] {
     const entities: Entity[] = [];
 
     for (const area of this.areas) {
@@ -84,7 +85,7 @@ export default class Floor implements Zone {
     }
   }
 
-  get lightEntity(): Entity | void {
+  get lightEntity(): LightEntity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
       device.idetntifiers.find(
         (identifiers) =>
@@ -99,14 +100,14 @@ export default class Floor implements Zone {
 
     if (magicAreasAreaDevice) {
       const magicAreasAreaLightEntities =
-        magicAreasAreaDevice.entitiesWithDomains(['light']);
+        magicAreasAreaDevice.entitiesWithDomains(['light']) as LightEntity[];
 
       if (magicAreasAreaLightEntities.length > 0) {
         return magicAreasAreaLightEntities[0];
       }
     }
 
-    const lightEntities = this.entitiesWithDomains(['light']);
+    const lightEntities = this.entitiesWithDomains(['light']) as LightEntity[];
 
     if (lightEntities.length === 1) {
       return lightEntities[0];

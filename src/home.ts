@@ -10,6 +10,7 @@ import {
 import Floor from './floor';
 import Area from './area';
 import User from './user';
+import { LightEntity } from './entities';
 
 export type HomeConfig = object;
 
@@ -130,7 +131,7 @@ export default class Home implements HomeType {
     }
   }
 
-  get lightEntity(): Entity | void {
+  get lightEntity(): LightEntity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
       device.idetntifiers.find(
         (identifiers) =>
@@ -141,14 +142,14 @@ export default class Home implements HomeType {
 
     if (magicAreasGlobalDevice) {
       const magicAreasGlobalLightEntities =
-        magicAreasGlobalDevice.entitiesWithDomains(['light']);
+        magicAreasGlobalDevice.entitiesWithDomains(['light']) as LightEntity[];
 
       if (magicAreasGlobalLightEntities.length > 0) {
         return magicAreasGlobalLightEntities[0];
       }
     }
 
-    const lightEntities = this.entitiesWithDomains(['light']);
+    const lightEntities = this.entitiesWithDomains(['light']) as LightEntity[];
 
     if (lightEntities.length === 1) {
       return lightEntities[0];
