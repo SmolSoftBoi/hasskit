@@ -21,6 +21,10 @@ export default class Entity implements Service {
     return this.hassEntity.name || '';
   }
 
+  get uniqueIdentifier(): string {
+    return this.hassEntity.entity_id;
+  }
+
   get characteristics(): Characteristic[] {
     return [
       new Characteristic(this.home, this.home.hass.states[this.hassEntity]),

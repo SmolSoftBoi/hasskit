@@ -1,3 +1,15 @@
 export const MAGIC_AREAS_PLATFORM = 'magic_areas';
 
 export const MAGIC_AREAS_GLOBAL_DEVICE_ID = 'magic_area_device_global';
+
+export const MAGIC_AREAS_AREA_DEVICE_ID =
+  'magic_area_device_${area.uniqueIdentifier}';
+
+export const MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS = {
+  overhead:
+    'light.magic_areas_light_groups_${area.uniqueIdentifier}_overhead_lights',
+  sleep: 'light.magic_areas_light_groups_${area.uniqueIdentifier}_sleep_lights',
+  accent:
+    'light.magic_areas_light_groups_${area.uniqueIdentifier}_accent_lights',
+  task: 'light.magic_areas_light_groups_${area.uniqueIdentifier}_task_lights',
+};

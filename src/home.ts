@@ -120,7 +120,7 @@ export default class Home implements HomeType {
 
     const climateEntities = this.entitiesWithDomains(['climate']);
 
-    if (climateEntities.length > 0) {
+    if (climateEntities.length === 1) {
       return climateEntities[0];
     }
   }
@@ -145,7 +145,7 @@ export default class Home implements HomeType {
 
     const lightEntities = this.entitiesWithDomains(['light']);
 
-    if (lightEntities.length > 0) {
+    if (lightEntities.length === 1) {
       return lightEntities[0];
     }
   }
@@ -170,7 +170,7 @@ export default class Home implements HomeType {
 
     const lockEntities = this.entitiesWithDomains(['lock']);
 
-    if (lockEntities.length > 0) {
+    if (lockEntities.length === 1) {
       return lockEntities[0];
     }
   }
@@ -195,7 +195,7 @@ export default class Home implements HomeType {
 
     const mediaPlayerEntities = this.entitiesWithDomains(['media_player']);
 
-    if (mediaPlayerEntities.length > 0) {
+    if (mediaPlayerEntities.length === 1) {
       return mediaPlayerEntities[0];
     }
   }

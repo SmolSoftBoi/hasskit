@@ -3,6 +3,11 @@ import Home from './home';
 import { HassAreaRegistryEntry } from './types/hass';
 import Entity from './entity';
 import Device from './device';
+import {
+  MAGIC_AREAS_AREA_DEVICE_ID,
+  MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS,
+  MAGIC_AREAS_PLATFORM,
+} from './integrations/magicAreas';
 
 export default class Area implements Room {
   home: Home;
@@ -43,5 +48,93 @@ export default class Area implements Room {
 
   entitiesWithDomains(domains: string[]): Entity[] {
     return this.entities.filter((entity) => domains.includes(entity.domain));
+  }
+
+  get climateEntity(): Entity | void {
+    const magicAreasAreaDevice = this.home.devices.find((device) =>
+      device.idetntifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] ===
+            MAGIC_AREAS_AREA_DEVICE_ID.replace(
+              '${area.uniqueIdentifier}',
+              this.uniqueIdentifier,
+            ),
+      ),
+    );
+
+    if (magicAreasAreaDevice) {
+      const magicAreasAreaClimateEntities =
+        magicAreasAreaDevice.entitiesWithDomains(['climate']);
+
+      if (magicAreasAreaClimateEntities.length > 0) {
+        return magicAreasAreaClimateEntities[0];
+      }
+    }
+
+    const climateEntities = this.entitiesWithDomains(['climate']);
+
+    if (climateEntities.length === 1) {
+      return climateEntities[0];
+    }
+  }
+
+  get lightEntityGroups(): Entity[] {
+    const magicAreasAreaDevice = this.home.devices.find((device) =>
+      device.idetntifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] ===
+            MAGIC_AREAS_AREA_DEVICE_ID.replace(
+              '${area.uniqueIdentifier}',
+              this.uniqueIdentifier,
+            ),
+      ),
+    );
+
+    if (magicAreasAreaDevice) {
+      const magicAreasAreaLightGroupEntities = magicAreasAreaDevice
+        .entitiesWithDomains(['light'])
+        .filter((entity) =>
+          Object.keys(MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS).includes(
+            entity.uniqueIdentifier,
+          ),
+        );
+
+      if (magicAreasAreaLightGroupEntities) {
+        return magicAreasAreaLightGroupEntities;
+      }
+    }
+
+    return this.entitiesWithDomains(['light']);
+  }
+
+  get lockEntity(): Entity | void {
+    const magicAreasAreaDevice = this.home.devices.find((device) =>
+      device.idetntifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] ===
+            MAGIC_AREAS_AREA_DEVICE_ID.replace(
+              '${area.uniqueIdentifier}',
+              this.uniqueIdentifier,
+            ),
+      ),
+    );
+
+    if (magicAreasAreaDevice) {
+      const magicAreasAreaClimateEntities =
+        magicAreasAreaDevice.entitiesWithDomains(['lock']);
+
+      if (magicAreasAreaClimateEntities.length > 0) {
+        return magicAreasAreaClimateEntities[0];
+      }
+    }
+
+    const climateEntities = this.entitiesWithDomains(['climate']);
+
+    if (climateEntities.length === 1) {
+      return climateEntities[0];
+    }
   }
 }

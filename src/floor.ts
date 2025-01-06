@@ -23,6 +23,16 @@ export default class Floor implements Zone {
   }
 
   get rooms(): Area[] {
+    return this.areas;
+  }
+
+  // Hass
+
+  get icon(): string | void {
+    return this.hassFloor.icon || void 0;
+  }
+
+  get areas(): Area[] {
     return Object.values(this.home.hass.areas)
       .filter(
         (area) => area.floor_id && area.floor_id === this.uniqueIdentifier,
