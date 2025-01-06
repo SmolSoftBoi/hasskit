@@ -2,6 +2,9 @@ export const MAGIC_AREAS_PLATFORM = 'magic_areas';
 
 export const MAGIC_AREAS_GLOBAL_DEVICE_ID = 'magic_area_device_global';
 
+export const MAGIC_AREAS_FLOOR_DEVICE_ID =
+  'magic_area_device_${floor.uniqueIdentifier}';
+
 export const MAGIC_AREAS_AREA_DEVICE_ID =
   'magic_area_device_${area.uniqueIdentifier}';
 
