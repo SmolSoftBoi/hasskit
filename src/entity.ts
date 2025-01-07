@@ -48,6 +48,10 @@ export default class Entity implements Service {
 
   // Hass
 
+  get identifier(): string {
+    return this.uniqueIdentifier.split('.')[1];
+  }
+
   get areaIdentifier(): string | void {
     if (this.hassEntity.area_id) {
       return this.hassEntity.area_id;

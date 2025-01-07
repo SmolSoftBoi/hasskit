@@ -101,8 +101,11 @@ export default class Area implements Room {
       const magicAreasAreaLightGroupEntities = (
         magicAreasAreaDevice.entitiesWithDomains(['light']) as LightEntity[]
       ).filter((entity) =>
-        Object.keys(MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS).includes(
-          entity.uniqueIdentifier,
+        Object.values(MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS).includes(
+          entity.uniqueIdentifier.replace(
+            '${area.uniqueIdentifier}',
+            this.uniqueIdentifier,
+          ),
         ),
       );
 
