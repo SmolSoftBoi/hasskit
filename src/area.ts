@@ -103,8 +103,8 @@ export default class Area implements Room {
       ).filter((entity) =>
         Object.values(MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS).includes(
           entity.uniqueIdentifier.replace(
-            '${area.uniqueIdentifier}',
             this.uniqueIdentifier,
+            '${area.uniqueIdentifier}',
           ),
         ),
       );
