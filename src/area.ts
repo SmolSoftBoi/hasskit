@@ -106,7 +106,7 @@ export default class Area implements Room {
         ),
       );
 
-      if (magicAreasAreaLightGroupEntities) {
+      if (magicAreasAreaLightGroupEntities.length > 0) {
         return magicAreasAreaLightGroupEntities;
       }
     }
