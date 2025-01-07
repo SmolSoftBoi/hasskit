@@ -58,7 +58,7 @@ export default class Floor implements Zone {
 
   get climateEntity(): Entity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===
@@ -87,7 +87,7 @@ export default class Floor implements Zone {
 
   get lightEntity(): LightEntity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===
@@ -116,7 +116,7 @@ export default class Floor implements Zone {
 
   get lockEntity(): Entity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===
@@ -145,7 +145,7 @@ export default class Floor implements Zone {
 
   get mediaPlayerEntity(): Entity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===

@@ -113,7 +113,7 @@ export default class Home implements HomeType {
 
   get climateEntity(): Entity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
@@ -138,7 +138,7 @@ export default class Home implements HomeType {
 
   get lightEntity(): LightEntity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
@@ -163,7 +163,7 @@ export default class Home implements HomeType {
 
   get lockEntity(): Entity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
@@ -188,7 +188,7 @@ export default class Home implements HomeType {
 
   get mediaPlayerEntity(): Entity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
@@ -213,7 +213,7 @@ export default class Home implements HomeType {
 
   get c02SignalEntity(): Entity | void {
     const c02SignalDevices = this.devices.filter((device) =>
-      device.idetntifiers.filter(
+      device.identifiers.filter(
         (identifiers) => identifiers[0] === 'c02signal',
       ),
     );

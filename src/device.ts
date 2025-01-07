@@ -3,7 +3,6 @@ import Home from './home';
 import { HassDeviceRegistryEntry } from './types/hass';
 import Entity, { EntityTypes } from './entity';
 import Area from './area';
-import { LightEntity } from './entities';
 
 export default class Device implements Accessory {
   home: Home;
@@ -46,7 +45,7 @@ export default class Device implements Accessory {
 
   // Hass
 
-  get idetntifiers(): Array<[string, string]> {
+  get identifiers(): Array<[string, string]> {
     return this.hassDevice.identifiers;
   }
 

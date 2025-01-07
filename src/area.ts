@@ -53,7 +53,7 @@ export default class Area implements Room {
 
   get climateEntity(): Entity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===
@@ -82,7 +82,7 @@ export default class Area implements Room {
 
   get lightEntityGroups(): LightEntity[] {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===
@@ -112,7 +112,7 @@ export default class Area implements Room {
 
   get lockEntity(): Entity | void {
     const magicAreasAreaDevice = this.home.devices.find((device) =>
-      device.idetntifiers.find(
+      device.identifiers.find(
         (identifiers) =>
           identifiers[0] === MAGIC_AREAS_PLATFORM &&
           identifiers[1] ===
