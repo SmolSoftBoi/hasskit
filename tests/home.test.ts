@@ -1,9 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import Home from '../src/home';
 import { Hass } from '../src/types/hass';
-import Device from '../src/device';
-import Entity from '../src/entity';
-import exp from 'constants';
 
 // Mock hass
 vi.mock('hass', {});
