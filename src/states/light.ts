@@ -1,8 +1,8 @@
 import Home from '../home';
 import State from '../state';
-import { HassLightColorMode, HassLightEntity } from '../types/hass.light';
+import { HassLightColorMode, HassLightEntity } from '../types/hass-light';
 
-export default class Light extends State {
+export default class LightState extends State {
   hassState: HassLightEntity;
 
   constructor(home: Home, hassState: HassLightEntity) {

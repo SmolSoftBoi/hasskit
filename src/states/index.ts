@@ -1,3 +1,4 @@
+import ClimateState from './climate';
 import LightState from './light';
 
-export { LightState };
+export { ClimateState, LightState };

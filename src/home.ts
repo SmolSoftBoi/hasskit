@@ -10,7 +10,7 @@ import {
 import Floor from './floor';
 import Area from './area';
 import User from './user';
-import { LightEntity } from './entities';
+import { ClimateEntity, LightEntity } from './entities';
 
 export type HomeConfig = object;
 
@@ -116,6 +116,8 @@ export default class Home implements HomeType {
     if (!this.cache.entities) {
       this.cache.entities = Object.values(this.hass.entities).map((entity) => {
         switch (entity.entity_id.split('.')[0]) {
+          case 'climate':
+            return new ClimateEntity(this, entity);
           case 'light':
             return new LightEntity(this, entity);
           default:

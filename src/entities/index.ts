@@ -1,3 +1,4 @@
+import ClimateEntity from './climate';
 import LightEntity from './light';
 
-export { LightEntity };
+export { ClimateEntity, LightEntity };
