@@ -84,9 +84,9 @@ describe('Home', () => {
       expect(myHome.devices).toBeInstanceOf(Array);
     });
 
-    test('Expect entitiesWithTypes to be defined and a function', () => {
-      expect(myHome.entitiesWithTypes).toBeDefined();
-      expect(myHome.entitiesWithTypes).toBeInstanceOf(Function);
+    test('Expect entitiesWithDomains to be defined and a function', () => {
+      expect(myHome.entitiesWithDomains).toBeDefined();
+      expect(myHome.entitiesWithDomains).toBeInstanceOf(Function);
     });
 
     test('Expect entities to be defined and an array', () => {
