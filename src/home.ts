@@ -14,9 +14,19 @@ import { LightEntity } from './entities';
 
 export type HomeConfig = object;
 
+type HomeCache = {
+  currentUser: User;
+  areas: Area[];
+  floors: Floor[];
+  devices: Device[];
+  entities: EntityTypes[];
+};
+
 export default class Home implements HomeType {
   hass: Hass;
   config: HomeConfig;
+
+  protected cache: Partial<HomeCache> = {};
 
   constructor(hass: Hass, config?: HomeConfig) {
     this.hass = hass;
@@ -55,29 +65,47 @@ export default class Home implements HomeType {
   }
 
   get currentUser(): User {
-    if (!this.hass.user) {
-      throw new Error();
+    if (!this.cache.currentUser) {
+      if (!this.hass.user) {
+        throw new Error();
+      }
+
+      this.cache.currentUser = new User(this, this.hass.user);
     }
 
-    return new User(this, this.hass.user);
+    return this.cache.currentUser;
   }
 
   // Hass
 
   get areas(): Area[] {
-    return Object.values(this.hass.areas).map((area) => new Area(this, area));
+    if (!this.cache.areas) {
+      this.cache.areas = Object.values(this.hass.areas).map(
+        (area) => new Area(this, area),
+      );
+    }
+
+    return this.cache.areas;
   }
 
   get floors(): Floor[] {
-    return Object.values(this.hass.floors).map(
-      (floor) => new Floor(this, floor),
-    );
+    if (!this.cache.floors) {
+      this.cache.floors = Object.values(this.hass.floors).map(
+        (floor) => new Floor(this, floor),
+      );
+    }
+
+    return this.cache.floors;
   }
 
   get devices(): Device[] {
-    return Object.values(this.hass.devices).map(
-      (device) => new Device(this, device),
-    );
+    if (!this.cache.devices) {
+      this.cache.devices = Object.values(this.hass.devices).map(
+        (device) => new Device(this, device),
+      );
+    }
+
+    return this.cache.devices;
   }
 
   entitiesWithDomains(domains: string[]): EntityTypes[] {
@@ -85,14 +113,18 @@ export default class Home implements HomeType {
   }
 
   get entities(): EntityTypes[] {
-    return Object.values(this.hass.entities).map((entity) => {
-      switch (entity.entity_id.split('.')[0]) {
-        case 'light':
-          return new LightEntity(this, entity);
-        default:
-          return new Entity(this, entity);
-      }
-    });
+    if (!this.cache.entities) {
+      this.cache.entities = Object.values(this.hass.entities).map((entity) => {
+        switch (entity.entity_id.split('.')[0]) {
+          case 'light':
+            return new LightEntity(this, entity);
+          default:
+            return new Entity(this, entity);
+        }
+      });
+    }
+
+    return this.cache.entities;
   }
 
   get weatherEntity(): Entity | void {

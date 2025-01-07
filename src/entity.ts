@@ -9,9 +9,15 @@ export type EntityDomain = 'light' | string;
 
 export type EntityTypes = Entity | LightEntity;
 
+type EntityCache = {
+  state: State;
+};
+
 export default class Entity implements Service {
   home: Home;
   hassEntity: HassEntityRegistryDisplayEntry;
+
+  protected cahce: Partial<EntityCache> = {};
 
   constructor(home: Home, entity: HassEntityRegistryDisplayEntry) {
     this.home = home;
@@ -57,10 +63,14 @@ export default class Entity implements Service {
   }
 
   get state(): State {
-    return new State(
-      this.home,
-      this.home.hass.states[this.hassEntity.entity_id],
-    );
+    if (!this.cahce.state) {
+      this.cahce.state = new State(
+        this.home,
+        this.home.hass.states[this.hassEntity.entity_id],
+      );
+    }
+
+    return this.cahce.state;
   }
 
   get device(): Device | void {

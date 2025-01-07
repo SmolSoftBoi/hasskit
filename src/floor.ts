@@ -39,11 +39,9 @@ export default class Floor implements Zone {
   }
 
   get areas(): Area[] {
-    return Object.values(this.home.hass.areas)
-      .filter(
-        (area) => area.floor_id && area.floor_id === this.uniqueIdentifier,
-      )
-      .map((area) => new Area(this.home, area));
+    return this.home.areas.filter(
+      (area) => area.floorIdentifier === this.uniqueIdentifier,
+    );
   }
 
   entitiesWithDomains(domains: string[]): EntityTypes[] {
