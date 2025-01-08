@@ -114,7 +114,7 @@ export default class Area implements Room {
       }
     }
 
-    return this.entitiesWithDomains(['light']) as LightEntity[];
+    return [];
   }
 
   get lockEntity(): Entity | void {
