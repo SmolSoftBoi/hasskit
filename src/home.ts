@@ -128,9 +128,13 @@ export default class Home implements HomeType {
 
   get floors(): Floor[] {
     if (!this.cache.floors) {
-      this.cache.floors = Object.values(this.hass.floors).map(
-        (floor) => new Floor(this, floor),
-      );
+      this.cache.floors = Object.values(this.hass.floors)
+        .map((floor) => new Floor(this, floor))
+        .sort((floorA, floorB) => {
+          const levelA = floorA.level || 0;
+          const levelB = floorB.level || 0;
+          return levelA - levelB;
+        });
     }
 
     return this.cache.floors;

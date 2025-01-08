@@ -38,6 +38,10 @@ export default class Floor implements Zone {
     return this.hassFloor.icon || void 0;
   }
 
+  get level(): number | void {
+    return this.hassFloor.level || void 0;
+  }
+
   get areas(): Area[] {
     return this.home.areas.filter(
       (area) => area.floorIdentifier === this.uniqueIdentifier,
