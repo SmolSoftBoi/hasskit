@@ -12,7 +12,13 @@ import Area from './area';
 import User from './user';
 import { ClimateEntity, LightEntity } from './entities';
 
-export type HomeConfig = object;
+export type HomeConfig = {
+  areas: HomeConfigArea[];
+};
+
+export type HomeConfigArea = {
+  id: string;
+};
 
 type HomeCache = {
   currentUser: User;
@@ -22,15 +28,39 @@ type HomeCache = {
   entities: EntityTypes[];
 };
 
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
 export default class Home implements HomeType {
   hass: Hass;
-  config: HomeConfig;
+  config: HomeConfig = {
+    areas: [],
+  };
 
   protected cache: Partial<HomeCache> = {};
 
-  constructor(hass: Hass, config?: HomeConfig) {
+  constructor(hass: Hass, config: DeepPartial<HomeConfig> = {}) {
     this.hass = hass;
-    this.config = config || {};
+    this.config = Home.createConfig(config);
+  }
+
+  static createConfig(partialConfig: DeepPartial<HomeConfig> = {}) {
+    const config: HomeConfig = {
+      areas: [],
+    };
+
+    if (partialConfig.areas) {
+      for (const area of partialConfig.areas) {
+        if (area && area.id) {
+          config.areas.push({
+            id: area.id,
+          });
+        }
+      }
+    }
+
+    return config;
   }
 
   // Home
