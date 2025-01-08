@@ -110,9 +110,17 @@ export default class Home implements HomeType {
 
   get areas(): Area[] {
     if (!this.cache.areas) {
-      this.cache.areas = Object.values(this.hass.areas).map(
-        (area) => new Area(this, area),
-      );
+      this.cache.areas = Object.values(this.hass.areas)
+        .map((area) => new Area(this, area))
+        .sort((areaA, areaB) => {
+          const indexA = this.config.areas.findIndex(
+            (configArea) => configArea.id === areaA.uniqueIdentifier,
+          );
+          const indexB = this.config.areas.findIndex(
+            (configArea) => configArea.id === areaB.uniqueIdentifier,
+          );
+          return indexA - indexB;
+        });
     }
 
     return this.cache.areas;
