@@ -39,6 +39,10 @@ export default class Area implements Room {
     return this.hassArea.floor_id || void 0;
   }
 
+  get icon(): string | void {
+    return this.hassArea.icon || void 0;
+  }
+
   get devices(): Device[] {
     return this.home.devices.filter(
       (device) => device.hassDevice.area_id === this.uniqueIdentifier,
