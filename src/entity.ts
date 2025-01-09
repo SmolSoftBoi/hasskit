@@ -70,6 +70,10 @@ export default class Entity implements Service {
     return this.hassEntity.device_id || void 0;
   }
 
+  get hidden(): boolean {
+    return this.hassEntity.hidden || false;
+  }
+
   get state(): State {
     if (!this.cahce.state) {
       this.cahce.state = new State(
