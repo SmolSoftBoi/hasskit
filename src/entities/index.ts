@@ -1,4 +1,5 @@
+import AutomationEntity from './automation';
 import ClimateEntity from './climate';
 import LightEntity from './light';
 
-export { ClimateEntity, LightEntity };
+export { AutomationEntity, ClimateEntity, LightEntity };

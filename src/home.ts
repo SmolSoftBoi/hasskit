@@ -1,6 +1,6 @@
 import { Home as HomeType } from '@smolpack/home-types';
 import { Hass } from './types/hass';
-import Entity, { EntityTypes } from './entity';
+import Entity, { EntityDomain, EntityTypes } from './entity';
 import Device from './device';
 import { WEATHERKIT_PLATFORM } from './integrations/weatherkit';
 import {
@@ -10,7 +10,7 @@ import {
 import Floor from './floor';
 import Area from './area';
 import User from './user';
-import { ClimateEntity, LightEntity } from './entities';
+import { AutomationEntity, ClimateEntity, LightEntity } from './entities';
 
 export type HomeConfig = {
   areas: HomeConfigArea[];
@@ -150,7 +150,7 @@ export default class Home implements HomeType {
     return this.cache.devices;
   }
 
-  entitiesWithDomains(domains: string[]): EntityTypes[] {
+  entitiesWithDomains(domains: EntityDomain[]): EntityTypes[] {
     return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 
@@ -158,6 +158,8 @@ export default class Home implements HomeType {
     if (!this.cache.entities) {
       this.cache.entities = Object.values(this.hass.entities).map((entity) => {
         switch (entity.entity_id.split('.')[0]) {
+          case 'automation':
+            return new AutomationEntity(this, entity);
           case 'climate':
             return new ClimateEntity(this, entity);
           case 'light':

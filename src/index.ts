@@ -3,8 +3,8 @@ import Floor from './floor';
 import Device from './device';
 import Entity from './entity';
 import State from './state';
-import { ClimateEntity, LightEntity } from './entities';
-import { ClimateState, LightState } from './states';
+import { AutomationEntity, ClimateEntity, LightEntity } from './entities';
+import { AutomationState, ClimateState, LightState } from './states';
 
 export {
   Home,
@@ -12,8 +12,10 @@ export {
   Device,
   Entity,
   State,
+  AutomationEntity,
   ClimateEntity,
   LightEntity,
+  AutomationState,
   ClimateState,
   LightState,
 };

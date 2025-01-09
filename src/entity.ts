@@ -3,11 +3,15 @@ import Home from './home';
 import { HassEntityRegistryDisplayEntry } from './types/hass';
 import State from './state';
 import Device from './device';
-import { ClimateEntity, LightEntity } from './entities';
+import { AutomationEntity, ClimateEntity, LightEntity } from './entities';
 
-export type EntityDomain = 'climate' | 'light' | string;
+export type EntityDomain = 'automation' | 'climate' | 'light' | string;
 
-export type EntityTypes = Entity | ClimateEntity | LightEntity;
+export type EntityTypes =
+  | Entity
+  | AutomationEntity
+  | ClimateEntity
+  | LightEntity;
 
 type EntityCache = {
   state: State;

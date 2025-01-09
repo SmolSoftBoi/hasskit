@@ -1,7 +1,7 @@
 import { Accessory } from '@smolpack/home-types';
 import Home from './home';
 import { HassDeviceRegistryEntry } from './types/hass';
-import Entity, { EntityTypes } from './entity';
+import Entity, { EntityDomain, EntityTypes } from './entity';
 import Area from './area';
 
 export default class Device implements Accessory {
@@ -61,7 +61,7 @@ export default class Device implements Accessory {
     );
   }
 
-  entitiesWithDomains(domains: string[]): EntityTypes[] {
+  entitiesWithDomains(domains: EntityDomain[]): EntityTypes[] {
     return this.entities.filter((entity) => domains.includes(entity.domain));
   }
 }
