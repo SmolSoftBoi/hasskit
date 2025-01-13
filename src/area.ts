@@ -116,6 +116,12 @@ export default class Area implements Room {
       if (magicAreasAreaLightGroupEntities.length > 1) {
         return magicAreasAreaLightGroupEntities;
       }
+
+      const magicAreaLightGroupEntityIds = magicAreasAreaLightGroupEntities.map(entity => entity.uniqueIdentifier);
+
+      const lightEntities = (this.entitiesWithDomains(['light']) as LightEntity[]).filter(entity => !magicAreaLightGroupEntityIds.includes(entity.uniqueIdentifier));
+
+      return lightEntities;
     }
 
     return [];
@@ -143,7 +149,7 @@ export default class Area implements Room {
       }
     }
 
-    const climateEntities = this.entitiesWithDomains(['climate']);
+    const climateEntities = this.entitiesWithDomains(['lock']);
 
     if (climateEntities.length === 1) {
       return climateEntities[0];
