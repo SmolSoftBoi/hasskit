@@ -35,6 +35,10 @@ export default class Entity implements Service {
     return this.hassEntity.name || '';
   }
 
+  get icon(): string | void {
+    return this.hassEntity.icon || void 0;
+  }
+
   get uniqueIdentifier(): string {
     return this.hassEntity.entity_id;
   }
