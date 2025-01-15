@@ -113,12 +113,14 @@ export default class Home implements HomeType {
       this.cache.areas = Object.values(this.hass.areas)
         .map((area) => new Area(this, area))
         .sort((areaA, areaB) => {
-          const indexA = this.config.areas.findIndex(
-            (configArea) => configArea.id === areaA.uniqueIdentifier,
-          );
-          const indexB = this.config.areas.findIndex(
-            (configArea) => configArea.id === areaB.uniqueIdentifier,
-          );
+          const indexA =
+            this.config.areas.findIndex(
+              (configArea) => configArea.id === areaA.uniqueIdentifier,
+            ) || this.config.areas.length + 1;
+          const indexB =
+            this.config.areas.findIndex(
+              (configArea) => configArea.id === areaB.uniqueIdentifier,
+            ) || this.config.areas.length + 1;
           return indexA - indexB;
         });
     }
@@ -131,8 +133,10 @@ export default class Home implements HomeType {
       this.cache.floors = Object.values(this.hass.floors)
         .map((floor) => new Floor(this, floor))
         .sort((floorA, floorB) => {
-          const levelA = floorA.level || 0;
-          const levelB = floorB.level || 0;
+          const levelA =
+            floorA.level || Object.keys(this.hass.floors).length + 1;
+          const levelB =
+            floorB.level || Object.keys(this.hass.floors).length + 1;
           return levelA - levelB;
         });
     }
@@ -170,12 +174,14 @@ export default class Home implements HomeType {
           }
         })
         .sort((entityA, entityB) => {
-          const indexA = this.config.areas.findIndex(
-            (configArea) => configArea.id === entityA.areaIdentifier,
-          );
-          const indexB = this.config.areas.findIndex(
-            (configArea) => configArea.id === entityB.areaIdentifier,
-          );
+          const indexA =
+            this.config.areas.findIndex(
+              (configArea) => configArea.id === entityA.areaIdentifier,
+            ) || this.config.areas.length + 1;
+          const indexB =
+            this.config.areas.findIndex(
+              (configArea) => configArea.id === entityB.areaIdentifier,
+            ) || this.config.areas.length + 1;
           return indexA - indexB;
         });
     }
