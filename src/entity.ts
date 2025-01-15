@@ -78,7 +78,7 @@ export default class Entity implements Service {
   }
 
   get hidden(): boolean {
-    return this.hassEntity.hidden || false;
+    return this.hassEntity.hidden ?? false;
   }
 
   get state(): State {

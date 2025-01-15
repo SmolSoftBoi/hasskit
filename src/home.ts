@@ -116,11 +116,11 @@ export default class Home implements HomeType {
           const indexA =
             this.config.areas.findIndex(
               (configArea) => configArea.id === areaA.uniqueIdentifier,
-            ) || this.config.areas.length + 1;
+            ) ?? this.config.areas.length;
           const indexB =
             this.config.areas.findIndex(
               (configArea) => configArea.id === areaB.uniqueIdentifier,
-            ) || this.config.areas.length + 1;
+            ) ?? this.config.areas.length;
           return indexA - indexB;
         });
     }
@@ -133,10 +133,8 @@ export default class Home implements HomeType {
       this.cache.floors = Object.values(this.hass.floors)
         .map((floor) => new Floor(this, floor))
         .sort((floorA, floorB) => {
-          const levelA =
-            floorA.level || Object.keys(this.hass.floors).length + 1;
-          const levelB =
-            floorB.level || Object.keys(this.hass.floors).length + 1;
+          const levelA = floorA.level ?? Object.keys(this.hass.floors).length;
+          const levelB = floorB.level ?? Object.keys(this.hass.floors).length;
           return levelA - levelB;
         });
     }
@@ -177,11 +175,11 @@ export default class Home implements HomeType {
           const indexA =
             this.config.areas.findIndex(
               (configArea) => configArea.id === entityA.areaIdentifier,
-            ) || this.config.areas.length + 1;
+            ) ?? this.config.areas.length;
           const indexB =
             this.config.areas.findIndex(
               (configArea) => configArea.id === entityB.areaIdentifier,
-            ) || this.config.areas.length + 1;
+            ) ?? this.config.areas.length;
           return indexA - indexB;
         });
     }

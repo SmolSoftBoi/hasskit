@@ -39,7 +39,7 @@ export default class Floor implements Zone {
   }
 
   get level(): number | void {
-    return this.hassFloor.level || void 0;
+    return this.hassFloor.level ?? void 0;
   }
 
   get areas(): Area[] {
