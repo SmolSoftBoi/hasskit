@@ -52,7 +52,7 @@ export default class Home implements HomeType {
 
     if (partialConfig.areas) {
       for (const area of partialConfig.areas) {
-        if (area && area.id) {
+        if (area?.id) {
           config.areas.push({
             id: area.id,
           });
@@ -172,13 +172,13 @@ export default class Home implements HomeType {
         .sort((entityA, entityB) => {
           const indexA = this.config.areas.findIndex(
             (configArea) =>
-              configArea.id === entityA.area?.uniqueIdentifier ||
-              configArea.id === entityA.device?.area?.uniqueIdentifier,
+              configArea.id === entityA.areaIdentifier ||
+              entityA.device?.area?.uniqueIdentifier,
           );
           const indexB = this.config.areas.findIndex(
             (configArea) =>
-              configArea.id === entityB.area?.uniqueIdentifier ||
-              configArea.id === entityB.device?.area?.uniqueIdentifier,
+              configArea.id === entityB.areaIdentifier ||
+              entityB.device?.area?.uniqueIdentifier,
           );
           return indexA - indexB;
         });

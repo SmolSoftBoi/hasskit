@@ -62,7 +62,7 @@ export default class Entity implements Service {
       return this.hassEntity.area_id;
     }
 
-    if (this.device && this.device.area) {
+    if (this.device?.area) {
       return this.device.area.uniqueIdentifier;
     }
   }
@@ -73,7 +73,7 @@ export default class Entity implements Service {
 
   get area(): Area | void {
     return this.home.areas.find(
-      (area) => area.uniqueIdentifier === this.areaIdentifier,
+      (area) => this.areaIdentifier === area.uniqueIdentifier,
     );
   }
 
