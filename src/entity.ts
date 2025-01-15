@@ -4,6 +4,7 @@ import { HassEntityRegistryDisplayEntry } from './types/hass';
 import State from './state';
 import Device from './device';
 import { AutomationEntity, ClimateEntity, LightEntity } from './entities';
+import Area from './area';
 
 export type EntityDomain = 'automation' | 'climate' | 'light' | string;
 
@@ -68,6 +69,12 @@ export default class Entity implements Service {
 
   get deviceIdentifier(): string | void {
     return this.hassEntity.device_id || void 0;
+  }
+
+  get area(): Area | void {
+    return this.home.areas.find(
+      (area) => area.uniqueIdentifier === this.areaIdentifier,
+    );
   }
 
   get hidden(): boolean {

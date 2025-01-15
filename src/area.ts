@@ -4,6 +4,7 @@ import { HassAreaRegistryEntry } from './types/hass';
 import Entity, { EntityDomain, EntityTypes } from './entity';
 import Device from './device';
 import {
+  MAGIC_AREA_AREA_LIGHT_GROUP_ALL_ENTITY_ID,
   MAGIC_AREAS_AREA_DEVICE_ID,
   MAGIC_AREAS_AREA_LIGHT_GROUP_ENTITY_IDS,
   MAGIC_AREAS_PLATFORM,
@@ -117,9 +118,25 @@ export default class Area implements Room {
         return magicAreasAreaLightGroupEntities;
       }
 
-      const magicAreaLightGroupEntityIds = magicAreasAreaLightGroupEntities.map(entity => entity.uniqueIdentifier);
+      const magicAreasAreaLightEntity = magicAreasAreaLightGroupEntities;
 
-      const lightEntities = (this.entitiesWithDomains(['light']) as LightEntity[]).filter(entity => !magicAreaLightGroupEntityIds.includes(entity.uniqueIdentifier));
+      const magicAreaLightGroupEntityIds = [
+        ...magicAreasAreaLightGroupEntities.map(
+          (entity) => entity.uniqueIdentifier,
+        ),
+      ];
+
+      const lightEntities = (
+        this.entitiesWithDomains(['light']) as LightEntity[]
+      ).filter(
+        (entity) =>
+          !magicAreaLightGroupEntityIds.includes(entity.uniqueIdentifier) ||
+          entity.uniqueIdentifier ===
+            MAGIC_AREA_AREA_LIGHT_GROUP_ALL_ENTITY_ID.replace(
+              '${area.uniqueIdentifier}',
+              this.uniqueIdentifier,
+            ),
+      );
 
       return lightEntities;
     }

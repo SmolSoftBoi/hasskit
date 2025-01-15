@@ -156,18 +156,30 @@ export default class Home implements HomeType {
 
   get entities(): EntityTypes[] {
     if (!this.cache.entities) {
-      this.cache.entities = Object.values(this.hass.entities).map((entity) => {
-        switch (entity.entity_id.split('.')[0]) {
-          case 'automation':
-            return new AutomationEntity(this, entity);
-          case 'climate':
-            return new ClimateEntity(this, entity);
-          case 'light':
-            return new LightEntity(this, entity);
-          default:
-            return new Entity(this, entity);
-        }
-      });
+      this.cache.entities = Object.values(this.hass.entities)
+        .map((entity) => {
+          switch (entity.entity_id.split('.')[0]) {
+            case 'automation':
+              return new AutomationEntity(this, entity);
+            case 'climate':
+              return new ClimateEntity(this, entity);
+            case 'light':
+              return new LightEntity(this, entity);
+            default:
+              return new Entity(this, entity);
+          }
+        })
+        .sort((entityA, entityB) => {
+          const indexA = this.config.areas.findIndex(
+            (configArea) =>
+              entityA.area && configArea.id === entityA.area.uniqueIdentifier,
+          );
+          const indexB = this.config.areas.findIndex(
+            (configArea) =>
+              entityB.area && configArea.id === entityB.area.uniqueIdentifier,
+          );
+          return indexA - indexB;
+        });
     }
 
     return this.cache.entities;
