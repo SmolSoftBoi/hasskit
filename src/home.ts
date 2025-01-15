@@ -171,12 +171,10 @@ export default class Home implements HomeType {
         })
         .sort((entityA, entityB) => {
           const indexA = this.config.areas.findIndex(
-            (configArea) =>
-              configArea.id === entityA.areaIdentifier,
+            (configArea) => configArea.id === entityA.areaIdentifier,
           );
           const indexB = this.config.areas.findIndex(
-            (configArea) =>
-              configArea.id === entityB.areaIdentifier,
+            (configArea) => configArea.id === entityB.areaIdentifier,
           );
           return indexA - indexB;
         });
