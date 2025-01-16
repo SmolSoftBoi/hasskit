@@ -303,26 +303,26 @@ export default class Home implements HomeType {
     }
   }
 
-  get c02SignalEntity(): Entity | void {
-    const c02SignalDevices = this.devices.filter((device) =>
+  get co2SignalEntity(): Entity | void {
+    const co2SignalDevices = this.devices.filter((device) =>
       device.identifiers.filter(
-        (identifiers) => identifiers[0] === 'c02signal',
+        (identifiers) => identifiers[0] === 'co2signal',
       ),
     );
 
-    if (c02SignalDevices.length > 0) {
-      const c02SignalEntities: Entity[] = [];
+    if (co2SignalDevices.length > 0) {
+      const co2SignalEntities: Entity[] = [];
 
-      for (const c02SignalDevice of c02SignalDevices) {
-        c02SignalEntities.push(
-          ...c02SignalDevice.entities.filter(
-            (entity) => entity.characteristics[0].units === '%',
+      for (const co2SignalDevice of co2SignalDevices) {
+        co2SignalEntities.push(
+          ...co2SignalDevice.entities.filter(
+            (entity) => entity.state.units === '%',
           ),
         );
       }
 
-      if (c02SignalEntities.length > 0) {
-        return c02SignalEntities[0];
+      if (co2SignalEntities.length > 0) {
+        return co2SignalEntities[0];
       }
     }
   }
