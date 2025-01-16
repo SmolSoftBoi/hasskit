@@ -305,9 +305,7 @@ export default class Home implements HomeType {
 
   get co2SignalEntity(): Entity | void {
     const co2SignalDevices = this.devices.filter((device) =>
-      device.identifiers.filter(
-        (identifiers) => identifiers[0] === 'co2signal',
-      ),
+      device.identifiers.some((identifiers) => identifiers[0] === 'co2signal'),
     );
 
     if (co2SignalDevices.length > 0) {
