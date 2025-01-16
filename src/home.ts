@@ -314,11 +314,13 @@ export default class Home implements HomeType {
       const co2SignalEntities: Entity[] = [];
 
       for (const co2SignalDevice of co2SignalDevices) {
-        co2SignalEntities.push(
-          ...co2SignalDevice.entities.filter(
-            (entity) => entity.state.units === '%',
-          ),
+        const co2SignalDeviceEntities = co2SignalDevice.entities.filter(
+          (entity) => entity.state.units === '%',
         );
+
+        if (co2SignalDeviceEntities.length > 0) {
+          co2SignalEntities.push(...co2SignalDeviceEntities);
+        }
       }
 
       if (co2SignalEntities.length > 0) {
