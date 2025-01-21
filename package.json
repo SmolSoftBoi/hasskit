@@ -1,6 +1,6 @@
 {
   "name": "@smolpack/hasskit",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "type": "module",
   "exports": {
     ".": {
