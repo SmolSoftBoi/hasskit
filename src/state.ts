@@ -21,6 +21,10 @@ export default class State implements Characteristic {
     return this.hassState.attributes.friendly_name || '';
   }
 
+  get characteristicType(): string {
+    return this.hassState.attributes.device_class || '';
+  }
+
   get units(): string | void {
     return this.hassState.attributes.unit_of_measurement;
   }
