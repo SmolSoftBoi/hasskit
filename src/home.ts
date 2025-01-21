@@ -232,6 +232,89 @@ export default class Home implements HomeType {
     }
   }
 
+  get temperatureEntity(): Entity | void {
+    const magicAreasGlobalDevice = this.devices.find((device) =>
+      device.identifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
+      ),
+    );
+
+    if (magicAreasGlobalDevice) {
+      const magicAreasGlobalTemperatureEntities =
+        magicAreasGlobalDevice.entities.filter(
+          (entity) => entity.state.characteristicType === 'temperature',
+        );
+
+      if (magicAreasGlobalTemperatureEntities.length > 0) {
+        return magicAreasGlobalTemperatureEntities[0];
+      }
+    }
+
+    const temperatureEntities = this.entities.filter(
+      (entity) => entity.state.characteristicType === 'temperature',
+    );
+
+    if (temperatureEntities.length === 1) {
+      return temperatureEntities[0];
+    }
+  }
+
+  get humidityEntity(): Entity | void {
+    const magicAreasGlobalDevice = this.devices.find((device) =>
+      device.identifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
+      ),
+    );
+
+    if (magicAreasGlobalDevice) {
+      const magicAreasGlobalHumidityEntities =
+        magicAreasGlobalDevice.entities.filter(
+          (entity) => entity.state.characteristicType === 'humidity',
+        );
+
+      if (magicAreasGlobalHumidityEntities.length > 0) {
+        return magicAreasGlobalHumidityEntities[0];
+      }
+    }
+
+    const humidityEntities = this.entities.filter(
+      (entity) => entity.state.characteristicType === 'humidity',
+    );
+
+    if (humidityEntities.length === 1) {
+      return humidityEntities[0];
+    }
+  }
+
+  get coverEntity(): Entity | void {
+    const magicAreasGlobalDevice = this.devices.find((device) =>
+      device.identifiers.find(
+        (identifiers) =>
+          identifiers[0] === MAGIC_AREAS_PLATFORM &&
+          identifiers[1] === MAGIC_AREAS_GLOBAL_DEVICE_ID,
+      ),
+    );
+
+    if (magicAreasGlobalDevice) {
+      const magicAreasGlobalCoverEntities =
+        magicAreasGlobalDevice.entitiesWithDomains(['cover']);
+
+      if (magicAreasGlobalCoverEntities.length > 0) {
+        return magicAreasGlobalCoverEntities[0];
+      }
+    }
+
+    const coverEntities = this.entitiesWithDomains(['cover']);
+
+    if (coverEntities.length === 1) {
+      return coverEntities[0];
+    }
+  }
+
   get lightEntity(): LightEntity | void {
     const magicAreasGlobalDevice = this.devices.find((device) =>
       device.identifiers.find(
