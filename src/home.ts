@@ -108,6 +108,10 @@ export default class Home implements HomeType {
 
   // Hass
 
+  get panelUrl(): string {
+    return this.hass.panelUrl;
+  }
+
   get areas(): Area[] {
     if (!this.cache.areas) {
       this.cache.areas = Object.values(this.hass.areas)
